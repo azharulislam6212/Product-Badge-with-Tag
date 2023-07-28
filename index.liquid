@@ -1,0 +1,65 @@
+       <div class="product__badge">
+
+              {% if product.compare_at_price > product.price  %}
+                <span class="p__badge badge-sale">Sale</span>
+                {% endif %}
+
+
+                {% for tag in product.tags %}
+
+                  {% if  tag contains '__badge:' %}
+              
+                  {% assign tag_name = tag | replace: '__badge:', '' %}
+
+                     {% if tag_name contains "Frame" or tag_name contains "frame" %}
+
+                      <div class="badge-freame">
+                       <img src="{{"frame.svg" | asset_url }}" alt="frame">
+                      </div>
+
+                      {% else %}
+                        
+                      <span class="p__badge badge-{{ tag_name | handleize}}">{{tag_name}}</span>
+
+                    {% endif %}
+
+                  {% endif %}
+                {% endfor %}
+  
+            </div>
+ <style>
+.product__badge{
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 9;
+}
+
+.p__badge{
+  font-size: 14px !important;
+  font-family: "Proxima";
+  font-weight: 600 !important;
+  min-width: 76px;
+  line-height: 32px !important;
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+  background: #FBF8F3;
+  color: rgba(151, 112, 88, 1);
+}
+
+.badge-sale{
+  background: #EDD671;
+  color: rgba(0, 0, 0, 1);
+}
+
+.badge-bestseller{
+  background: #977058;
+  color: rgba(255, 255, 255, 1);
+}
+
+.badge-new{
+  background: #FBF8F3;
+  color: rgba(151, 112, 88, 1);
+}
+</style>
